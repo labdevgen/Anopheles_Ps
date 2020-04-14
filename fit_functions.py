@@ -1,7 +1,8 @@
 from scipy.optimize import curve_fit
 from sklearn.linear_model import LinearRegression
 import numpy as np
-import math
+from Expected_calculator import get_dumpPath
+import os, pickle
 
 def fit_linear_regression(data, resolution,
                           starting_npoints = 5,
@@ -9,6 +10,13 @@ def fit_linear_regression(data, resolution,
                           crop_min = -1.75,
                           crop_max = -0.05,
                           max_plot_dist=50000000):
+
+    hash_key = "".join(map(str,locals().values()))
+    dump_path = get_dumpPath(hash_key,root="data/fit_dumps")
+    if os.path.isfile(dump_path):
+        print ("Loading data from dump...")
+        a, b = pickle.load(open(dump_path,"rb"))
+        return a,b
 
     maxdist = min([len(i) for i in data.values()])
     distances = np.log(np.arange(maxdist)*resolution+1)
@@ -65,7 +73,10 @@ def fit_linear_regression(data, resolution,
         coeffs.append(curr_coef)
         plot_distances.append(distances[st])
 
-    return np.exp(plot_distances), np.array(coeffs)
+    X,Y = np.exp(plot_distances), np.array(coeffs)
+    print ("Saving data to dump...")
+    pickle.dump((X,Y),open(dump_path, "wb"))
+    return X, Y
 
 def fit_delta(data, npoints = 20, step = 2):
     maxdist = min([len(i) for i in data.values()])

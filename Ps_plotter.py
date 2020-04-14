@@ -41,12 +41,12 @@ def row2color(row):
 
             "Aedes": {"color":"orange", "linewidth":1},
             "Culex": {"color": "lightseagreen","linewidth":1},
-            "RaoCondensinDegron": {"color": "blue", "linewidth":2},
-            "2017Haarhuis_KO_WAPL1" : {"color":  "red",  "linewidth":2},
-            "2017Haarhuis_Kontrol": {"color":  "red", "linestyle":"--", "linewidth":0.5},
-            "LiverTAM": {"color": "yellow", "linestyle": "--", "linewidth": 1},
-            "LiverNipbl": {"color": "red", "linestyle": "--", "linewidth": 1},
-            "BonevCN":{"color":"purple"},
+            "HCT116 RAD21-": {"color": "blue", "linewidth":2},
+            "HAP1_WAPL1-" : {"color":  "red",  "linewidth":2},
+            "HAP1": {"color":  "red", "linestyle":"--", "linewidth":0.5},
+#            "LiverTAM": {"color": "yellow", "linestyle": "--", "linewidth": 1},
+            "Liver Nipbl-": {"color": "red", "linestyle": "--", "linewidth": 1},
+#            "BonevCN":{"color":"purple"},
 #            "DekkerCapH-": {"color":"red","marker" : "*", "linestyle":"--"},
 #            "DekkerCAPHControl": {"color": "red", "marker" : "*"},
 #            "DekkerCapH2-": {"color":"salmon", "marker":"^", "linestyle" : "--"},
@@ -87,13 +87,15 @@ datasets = pd.read_csv(dataset, sep="\t",
 analysis = {
 #    "Anopheles": datasets.query("(name in ['Acol','Amer','Aste','Aalb','Aatr'])"),
 #    "test": datasets.query("(name in ['Acol','Amer'])")
-#    "Other_insects": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')")
-#    "mammals": datasets.query("(subtaxon=='mammals')"),
-#    "chicken": datasets.query("(subtaxon=='chick')")
+    "Other_insects": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')")
+#    "Other_insects_for_multiplot": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')" + \
+#            "and not (name in ['Dmel_3-4h','Dmel_c12','Dmel_c13','Dmel_mitotic'])")
+#    "mammals": datasets.query("(subtaxon=='mammals')")
+#    "chicken": datasets.query("(subtaxon=='chick')"),
 #    "Nipbl": datasets.query("(name in ['LiverWT','LiverTAM','LiverNipbl'])")
 #    "Aedes":  datasets.query("name=='Aedes'")
 #    "mammals_test": datasets.query("(name=='BonevNPC')")
-    "all_maps_from_Gibcus_et_al": datasets.query("subtaxon=='chick_Dekker'")
+#    "all_maps_from_Gibcus_et_al": datasets.query("subtaxon=='chick_Dekker'")
 }
 
 multiplot = False # draw all graphs on one plot or draw multiple subplots
@@ -140,7 +142,7 @@ for func in ["Slope"]:
                 #plt.show()
                 break
         if multiplot:
-            #multiplots(plots, shadow=(func=="Slope"), average=(func=="Slope"))
+            multiplots(plots, shadow=(func=="Slope"), average=(func=="Slope"))
             #multiplots(plots, shadow=False, average=False)
             if func=="Slope":
                 plt.gca().set_ylabel("Slope")
@@ -151,5 +153,7 @@ for func in ["Slope"]:
         else:
             multiplot_with_subplots(plots, xlabel="Genomic distance", y_label="Slope")
         plt.tight_layout()
-        plt.savefig("result_" + suffix +"_" + func +"_" + str(multiplot) + ".png", dpi=500)
+        fig_path = "result_" + suffix +"_" + func +"_" + str(multiplot) + ".png"
+        print ("Saving figure "+fig_path)
+        plt.savefig(fig_path, dpi=500)
         plt.clf()

@@ -45,13 +45,20 @@ def multiplots(plots, shadow, average, logx = True):
 
 
 def multiplot_with_subplots(plots, xlabel, y_label):
-    nrows = 3
-    ncols = len(plots.values()) // nrows
-    plt.gcf().set_size_inches(21, 15)
-    if ncols*nrows < len(plots.values()):
-        ncols += 1
+    if len(plots.values()) <= 6:
+        nrows = 2
+        ncols = 3
+    else:
+        ncols = 3
+        nrows = len(plots.values()) // ncols
+        if ncols * nrows < len(plots.values()):
+            nrows += 1
+
+    plt.gcf().set_size_inches(7*ncols, 5*nrows)
+
     for ind, p in enumerate(plots.values()):
         plt.subplot(nrows, ncols, ind+1)
+        p[1]["linewidth"] = 1.5
         plt.plot(p[0].X,p[0].Y,**p[1],label=p[2])
         plt.axhline(y=-1,ls="--",color="k")
         plt.annotate(p[2], xy=(0.05, 0.95), size=14, xycoords="axes fraction",

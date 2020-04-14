@@ -7,10 +7,10 @@ Aqmac	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/h
 Aalb	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AalbS2/AalbS2_V3.hic
 Aatr	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AatrE3/AatrE3_V3.hic	data/eig/AatrE3_V3.tpm.my.eig.bedGraph
 Dmel_Renschler	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Renschler_et_al_dmel/GSM3414719_Dmel.hic
-Dmel_3-4h	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/HugetAL_Zelda_Dmel/Hug2017_3-4h_all_5k.mcool.ginteractions.tsv.pre.hic
-Dmel_c12	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/HugetAL_Zelda_Dmel/Hug2017_c12_all_5k.mcool.ginteractions.tsv.pre.hic
-Dmel_c13	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/HugetAL_Zelda_Dmel/Hug2017_c13_all_5k.mcool.ginteractions.tsv.pre.hic
-Dmel_mitotic	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/HugetAL_Zelda_Dmel/Hug2017_mitotic_all_5k.mcool.ginteractions.tsv.pre.hic
+Dmel embryo 3-4h	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Drosophilla/Hug_dmel_development/3_4h_Embryo/aligned/inter.hic
+Dmel embryo nc12	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Drosophilla/Hug_dmel_development/nuclear_cycle_12/aligned/inter.hic
+Dmel embryo nc13	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Drosophilla/Hug_dmel_development/nuclear_cycle_13/aligned/inter.hic
+Dmel embryo nc1-4	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Drosophilla/Hug_dmel_development/nuclear_cycle_1_4/aligned/inter.hic
 Dbus	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Renschler_et_al_dmel/GSM3414720_Dbus.hic
 Dvir	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Renschler_et_al_dmel/GSM3414721_Dvir.hic
 Kc_Eagen	insect	Drosophila	WT	https://hicfiles.s3.amazonaws.com/external/eagen/GSE89112_Kc167combined.hic
@@ -29,13 +29,13 @@ CME	vertebrate	chick	CME	https://genedev.bionet.nsc.ru/site/hic_out/Chicken/ChME
 Aacr	insect	Aedes	WT	https://genedev.bionet.nsc.ru/site/hic_out/Aedes/AaCR_1_allValidPairs.hic
 AaU	insect	Aedes	WT	https://genedev.bionet.nsc.ru/site/hic_out/Aedes/AaU_3.hic
 Aedes	insect	Aedes	Aedes	https://genedev.bionet.nsc.ru/site/hic_out/Aedes/Aedes_aegypti/GSE113256_mega_30.hic
-BonevNPC	vertebrate	mammals	WT	https://hicfiles.s3.amazonaws.com/external/bonev/NPC_mapq30.hic	data/eig/chr10_bonev_NPC
-BonevmESC	vertebrate	mammals	WT	https://hicfiles.s3.amazonaws.com/external/bonev/ES_mapq30.hic
-PhansteynMonocytes	vertebrate	mammals	WT	https://s3.amazonaws.com/hicfiles/external/phanstiel/updated_O/Snyder_O.hic
-RaoCondensinUntreated	vertebrate	mammals	WT	https://s3.amazonaws.com/hicfiles/hiseq/degron/untreated/unsynchronized/combined.hic
-RaoCondensinDegron	vertebrate	mammals	-Condensin	https://s3.amazonaws.com/hicfiles/hiseq/degron/treated_6hr/unsynchronized/combined.hic
-2017Haarhuis_KO_WAPL1	vertebrate	mammals	-WAPL	https://s3.amazonaws.com/hicfiles/external/wapl_hic/WaplKO_1.14.hic
-2017Haarhuis_Kontrol	vertebrate	mammals	WT	https://s3.amazonaws.com/hicfiles/external/wapl_hic/WT.hic
+Neural progenitors	vertebrate	mammals	WT	https://hicfiles.s3.amazonaws.com/external/bonev/NPC_mapq30.hic	data/eig/chr10_bonev_NPC
+mESC	vertebrate	mammals	WT	https://hicfiles.s3.amazonaws.com/external/bonev/ES_mapq30.hic
+Monocytes	vertebrate	mammals	WT	https://s3.amazonaws.com/hicfiles/external/phanstiel/updated_O/Snyder_O.hic
+HCT116	vertebrate	mammals	WT	https://s3.amazonaws.com/hicfiles/hiseq/degron/untreated/unsynchronized/combined.hic
+HCT116 RAD21-	vertebrate	mammals	-Condensin	https://s3.amazonaws.com/hicfiles/hiseq/degron/treated_6hr/unsynchronized/combined.hic
+HAP1_WAPL1-	vertebrate	mammals	-WAPL	https://s3.amazonaws.com/hicfiles/external/wapl_hic/WaplKO_1.14.hic
+HAP1	vertebrate	mammals	WT	https://s3.amazonaws.com/hicfiles/external/wapl_hic/WT.hic
 DekkerSMC2-	vertebrate	chick	SMC2-	https://data.4dnucleome.org/files-processed/4DNFI4P8UBRL/@@download/4DNFI4P8UBRL.hic
 DekkerCAPHControl	vertebrate	chick	WT	https://data.4dnucleome.org/files-processed/4DNFIF7Q43N4/@@download/4DNFIF7Q43N4.hic
 DekkerPrometo	vertebrate	chick	Prometo	https://data.4dnucleome.org/files-processed/4DNFI7YRXKEO/@@download/4DNFI7YRXKEO.hic
@@ -43,13 +43,18 @@ DekkerCAPH2Control	vertebrate	chick	WT	https://data.4dnucleome.org/files-process
 DekkerSMC2Control	vertebrate	chick	WT	https://data.4dnucleome.org/files-processed/4DNFISWC2N8T/@@download/4DNFISWC2N8T.hic
 DekkerCapH-	vertebrate	chick	CapH-	https://data.4dnucleome.org/files-processed/4DNFIVILEERC/@@download/4DNFIVILEERC.hic
 DekkerCapH2-	vertebrate	chick	CapH2-	https://data.4dnucleome.org/files-processed/4DNFIJ67ZFBI/@@download/4DNFIJ67ZFBI.hic
-BonevCN	vertebrate	mammals	WT	http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic
-MNAseESC	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFI2TK7L2F/@@download/4DNFI2TK7L2F.hic
-MNAseHFF	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFIPC7P27B/@@download/4DNFIPC7P27B.hic
+hESC	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFI2TK7L2F/@@download/4DNFI2TK7L2F.hic
+HFF	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFIPC7P27B/@@download/4DNFIPC7P27B.hic
 #	Afun18	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/Afun/AfunF3.18+.hic
-LiverWT	vertebrate	mammals	WT	https://genedev.bionet.nsc.ru/site/hic_out/Nipbl_knockout_liver/UNTR.10kb.h5.ginteractions.tsv.pre.hic
-LiverTAM	vertebrate	mammals	WT	https://genedev.bionet.nsc.ru/site/hic_out/Nipbl_knockout_liver/GSE93431_TAM.10kb.cool.HDF5.ginteractions.tsv.pre.hic
-LiverNipbl	vertebrate	mammals	Nipbl	https://genedev.bionet.nsc.ru/site/hic_out/Nipbl_knockout_liver/GSE93431_NIPBL.10kb.cool.HDF5.ginteractions.tsv.pre.hic
+Liver	vertebrate	mammals	WT	https://genedev.bionet.nsc.ru/site/hic_out/Nipbl_knockout_liver/UNTR.10kb.h5.ginteractions.tsv.pre.hic
+Liver (Tamoxifen treated)	vertebrate	mammals	WT	https://genedev.bionet.nsc.ru/site/hic_out/Nipbl_knockout_liver/GSE93431_TAM.10kb.cool.HDF5.ginteractions.tsv.pre.hic
+Liver Nipbl-	vertebrate	mammals	Nipbl	https://genedev.bionet.nsc.ru/site/hic_out/Nipbl_knockout_liver/GSE93431_NIPBL.10kb.cool.HDF5.ginteractions.tsv.pre.hic
+# From Falk M, Feodorova Y, et al., Nature 2019
+Thymus cells	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFIE1P6RVH/@@download/4DNFIE1P6RVH.hic
+Thymus Lbr-/-	vertebrate	mammals	Lbr-/-	https://data.4dnucleome.org/files-processed/4DNFITEGKBIW/@@download/4DNFITEGKBIW.hic
+Retinal Neurons	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFIZ268JGC/@@download/4DNFIZ268JGC.hic
+Rod photoreceptor	vertebrate	mammals	WT	https://data.4dnucleome.org/files-processed/4DNFIJ1P4HBI/@@download/4DNFIJ1P4HBI.hic
+Cortical neurons	vertebrate	mammals	WT	http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic
 # All Dekker (Gibcus et al.) datasets:
 unsorted DT40 cells	vertebrate	chick_Dekker	Dekker	https://data.4dnucleome.org/files-processed/4DNFIC1CLPK7/@@download/4DNFIC1CLPK7.hic
 2.5m post G2 block	vertebrate	chick_Dekker	Dekker	https://data.4dnucleome.org/files-processed/4DNFI9IIO5PW/@@download/4DNFI9IIO5PW.hic
