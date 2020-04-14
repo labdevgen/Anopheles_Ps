@@ -101,10 +101,12 @@ def computeExpected(data, resolution):
                           right_on = "all_dist", how="outer").sort_index()["count"].fillna(0.)
     return result
 
-def get_contacts_using_juicer_dump(juicerpath,file,chr,resolution):
+def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,datatype = "observed"):
+    if chr2 is None:
+        chr2 = chr1
     # dump contacts from chromosome to temp file, then read if to Dframe
-    command = ["java", "-jar", juicerpath, "dump", "observed",
-               "KR", file, chr, chr, "BP", str(resolution), "temp.contacts"]
+    command = ["java", "-jar", juicerpath, "dump", datatype,
+               "KR", file, chr1, chr2, "BP", str(resolution), "temp.contacts"]
     print(" ".join(command))
     try:
         subprocess.run(" ".join(command), shell=True,
@@ -116,8 +118,11 @@ def get_contacts_using_juicer_dump(juicerpath,file,chr,resolution):
         exit(1)
     contacts = pd.read_csv("temp.contacts", sep="\t", header=None, names=["st1", "st2", "count"],
                            dtype={"st1": np.uint32, "st2": np.uint32, "count": np.float64})
-    contacts["dist"] = contacts["st2"] - contacts["st1"]
-    assert np.all(contacts["dist"].values >= 0)
+    if chr1 == chr2:
+        contacts["dist"] = contacts["st2"] - contacts["st1"]
+        assert np.all(contacts["dist"].values >= 0)
+    else:
+        contacts["dist"] = (contacts["st2"] - contacts["st1"]).abs()
     return contacts
 
 def getExpectedByCompartments(file, juicerpath, resolution,
