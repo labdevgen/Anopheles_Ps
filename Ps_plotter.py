@@ -6,6 +6,7 @@ import pandas as pd
 from fit_functions import plot_ps, fit_linear_regression, fit_ps_log_bins
 from plot_functions import multiplots, multiplot_with_subplots
 from Expected_calculator import dump
+import datetime
 
 def process(data):
     # normalize probabilities to 1
@@ -36,14 +37,14 @@ def row2color(row):
     }
 
     special_styles = {
-            "CME" : {"linestyle": "-", "color":"blue", "linewidth":2},
+            "Mature erythrocytes" : {"linestyle": "-", "color":"blue", "linewidth":2},
             "CIE": {"marker":"*","linestyle":":"},
 
             "Aedes": {"color":"orange", "linewidth":1},
             "Culex": {"color": "lightseagreen","linewidth":1},
             "HCT116 RAD21-": {"color": "blue", "linewidth":2},
-            "HAP1_WAPL1-" : {"color":  "red",  "linewidth":2},
-            "HAP1": {"color":  "red", "linestyle":"--", "linewidth":0.5},
+            "HAP1 WAPL1-" : {"color":  "red",  "linewidth":2},
+#            "HAP1": {"color":  "red", "linestyle":"--", "linewidth":0.5},
 #            "LiverTAM": {"color": "yellow", "linestyle": "--", "linewidth": 1},
             "Liver Nipbl-": {"color": "red", "linestyle": "--", "linewidth": 1},
 #            "BonevCN":{"color":"purple"},
@@ -53,12 +54,14 @@ def row2color(row):
 #            "DekkerCAPH2Control": {"color": "salmon", "marker":"^"},
 #            "DekkerSMC2-":{"color": "red"},
 #            "DekkerSMC2Control": {"color": "red", "linestyle":"--"},
-            "DekkerPrometo":{"color":"yellow", "linewidth":2},
-            "DekkerSMC2-":{"linestyle":"-", "color":"red", "linewidth":2},
-            "DekkerCapH-":{"linestyle":"--", "color":"red", "linewidth":1},
-            "DekkerCapH2-":{"linestyle":":", "color":"red", "linewidth":1},
-            "DmelCAP":{"linestyle":"-", "color":"red", "linewidth":2},
-            "DmelRAD": {"linestyle": "-", "color":"blue", "linewidth":2},
+            "Chick Prometaphase":{"color":"yellow", "linewidth":2},
+            "Chick SMC2-":{"linestyle":"-", "color":"red", "linewidth":1},
+            "Chick CapH-":{"linestyle":"-", "color":"red", "linewidth":1},
+            "Chick CapH2-":{"linestyle":"-", "color":"red", "linewidth":1},
+#            "DekkerCapH-":{"linestyle":"--", "color":"red", "linewidth":1},
+#            "DekkerCapH2-":{"linestyle":":", "color":"red", "linewidth":1},
+            "Dmel CAPH2-":{"linestyle":"-", "color":"red", "linewidth":2},
+            "Dmel RAD21-": {"linestyle": "-", "color":"blue", "linewidth":2},
 #            "SextonDrosophila":{"linestyle": "-", "color":"black"},
 #            "Kc167rowley": {"linestyle": "-", "color": "blue"},
 #            "S2": {"linestyle": "-", "color": "red"},
@@ -85,25 +88,30 @@ datasets = pd.read_csv(dataset, sep="\t",
                        comment="#")
 
 analysis = {
-#    "Anopheles": datasets.query("(name in ['Acol','Amer','Aste','Aalb','Aatr'])"),
+    "Anopheles": datasets.query("(name in ['An. col','An. mer (adult)','An. mer (embryo)','An. ste','An. alb','An. atr'])"),
 #    "test": datasets.query("(name in ['Acol','Amer'])")
-    "Other_insects": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')")
-#    "Other_insects_for_multiplot": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')" + \
-#            "and not (name in ['Dmel_3-4h','Dmel_c12','Dmel_c13','Dmel_mitotic'])")
+#    "Other_insects": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')")
+    "Other_insects_for_multiplot": datasets.query("(subtaxon=='Drosophila' or subtaxon=='culex' or name=='Aedes')" + \
+            "and not (name in ['Dmel embryo 3-4h','Dmel embryo nc12','Dmel embryo nc13','Dmel embryo nc1-4','Dmel embryo nc1-4 (mitotic)','Salivary glands(Polytene)'])")
 #    "mammals": datasets.query("(subtaxon=='mammals')")
-#    "chicken": datasets.query("(subtaxon=='chick')"),
+#    "chicken": datasets.query("(subtaxon=='chick')")
 #    "Nipbl": datasets.query("(name in ['LiverWT','LiverTAM','LiverNipbl'])")
 #    "Aedes":  datasets.query("name=='Aedes'")
 #    "mammals_test": datasets.query("(name=='BonevNPC')")
 #    "all_maps_from_Gibcus_et_al": datasets.query("subtaxon=='chick_Dekker'")
 }
 
-multiplot = False # draw all graphs on one plot or draw multiple subplots
+multiplot = True # draw all graphs on one plot or draw multiple subplots
+
+if multiplot:
+    funcs = ["Ps","Slope"]
+else:
+    funcs = ["Slope"]
 
 #for func in ["Ps_log"]:
 #for func in ["Ps"]:
-for func in ["Slope"]:
-#for func in ["Ps","Slope"]:
+#for func in ["Slope"]:
+for func in funcs:
     for suffix,species in analysis.items():
         plots = {}
         for ind in range(len(species)):
@@ -120,12 +128,18 @@ for func in ["Slope"]:
                 crop_max = 0.1
                 max_plot_dist = 35000000
 #                max_plot_dist = 350000000
+            elif row.taxon == "chick_Dekker":
+                crop_min = -3
+                crop_max = 1.
+                max_plot_dist = 35000000
             else:
                 crop_min = -1.75
                 crop_max = -0.25
                 max_plot_dist = 25000000
 #                max_plot_dist = 45000000
-
+            if row["name"]=="Chick Prometaphase":
+                crop_max = 1.
+                crop_min = -3
             if func == "Slope":
                 X,Y = fit_linear_regression(data, resolution=resolution,
                                             crop_min=crop_min, crop_max=crop_max, max_plot_dist=max_plot_dist)
@@ -152,8 +166,9 @@ for func in ["Slope"]:
             plt.gca().set_xlabel("Genomic distance")
         else:
             multiplot_with_subplots(plots, xlabel="Genomic distance", y_label="Slope")
-        plt.tight_layout()
-        fig_path = "result_" + suffix +"_" + func +"_" + str(multiplot) + ".png"
+        #plt.tight_layout()
+        fig_path = "results/"+str(datetime.datetime.today().date())+\
+                   "result_" + suffix +"_" + func +"_" + str(multiplot) + ".png"
         print ("Saving figure "+fig_path)
         plt.savefig(fig_path, dpi=500)
         plt.clf()
