@@ -76,14 +76,25 @@ def row2color(row):
 
     return result
 
+# this file contains list of data and defines path to .hic files
 dataset = "datasets.csv"
+
+# data is stored in .hic format, we need juicer tools to work with it
+# jucer tools could be downloaded from https://github.com/aidenlab/juicer/wiki/Download
+# after download, specify path to juicer_tools jar file
 juicer_tools = "juicer/juicer_tools_1.19.02.jar"
+
+# which resolution to use?
 resolution = 10000
-report = 170
+
+# stop analysis after this number of datasets. Used for debug only
+report = np.inf
 
 datasets = pd.read_csv(dataset, sep="\t",
                        comment="#")
 
+# each item of this dict describes subset of datasets for analysis,
+# e.g. one could subset datasets by taxon
 analysis = {
 #    "Anopheles": datasets.query("(name in ['Acol','Amer','Aste','Aalb','Aatr'])"),
 #    "test": datasets.query("(name in ['Acol','Amer'])")
@@ -98,34 +109,53 @@ analysis = {
 #    "all_maps_from_Gibcus_et_al": datasets.query("subtaxon=='chick_Dekker'")
 }
 
-multiplot = False # draw all graphs on one plot or draw multiple subplots
+# draw all graphs on one plot (=Trus)
+# or draw multiple subplots, one subplot for each dataset (=False)
+multiplot = False
+
+# functions are defined in fit_functions.pu
+# I mostly use Slope, which computes slopoe, and Ps, which draws P(s)
 
 #for func in ["Ps_log"]:
 #for func in ["Ps"]:
 for func in ["Slope"]:
 #for func in ["Ps","Slope"]:
     for suffix,species in analysis.items():
-        plots = {}
+        # example: suffix = Anopheles, items is pd table with anopheles datasets
+        plots = {}         # here we will store computed data for plot
         for ind in range(len(species)):
             row = species.iloc[ind]
             logging.info(row["name"])
             hic = row.link
             logging.info("Starting dump")
+
+            # dump expected vector from juicebox using juicer_tools soft
+            # see Expected_calculator.py for details
             data = dump(hic,juicer_tools,resolution)
+
+            # last expected vector values might be all the same,
+            # because for very long distances juicer computes expected as average
+            # of few distance bins
+            # process will clip data at this point, and then normalize all expected values
+            # to make the sum(expected)=1
             data = process(data)
+
             logging.info("Fitting...")
             # X,Y = fit_power_low(data)
+            # this will define taxon-specific contacts used in fit function
             if row.taxon == "vertebrate":
                 crop_min = -2.2
                 crop_max = 0.1
                 max_plot_dist = 35000000
-#                max_plot_dist = 350000000
             else:
                 crop_min = -1.75
                 crop_max = -0.25
                 max_plot_dist = 25000000
 #                max_plot_dist = 45000000
 
+            # fit is the core of whole module. It fits linear regression in log/log coordinates,
+            # or returns P(s) values
+            # see fit_functions code
             if func == "Slope":
                 X,Y = fit_linear_regression(data, resolution=resolution,
                                             crop_min=crop_min, crop_max=crop_max, max_plot_dist=max_plot_dist)
@@ -136,11 +166,19 @@ for func in ["Slope"]:
             else:
                 raise
             logging.info("Plotting...")
+            # plots is a dictionary, each item (type=list) describes one plot
+            # description should contain:
+            # 1.) pd.Dataframe with X and Y values - this is main data, X and Y points
+            # 2.) optional arguments, such as line color, line width and etc.,
+            # 3.) legend (=plot name)
+            # 4.) sample genotype (currently not used)
             plots[ind] = [pd.DataFrame({"X":X,"Y":Y}),row2color(row),row["name"],row["Genotype"]]
             logging.info("Done!")
             if ind >= report and ind % report == 0:
                 #plt.show()
                 break
+        # now when all datasets processed, draw a plot
+        # see multiplots and multiplot_with_subplots code in plot_functions.py
         if multiplot:
             multiplots(plots, shadow=(func=="Slope"), average=(func=="Slope"))
             #multiplots(plots, shadow=False, average=False)
@@ -148,7 +186,6 @@ for func in ["Slope"]:
                 plt.gca().set_ylabel("Slope")
             elif func=="Ps":
                 plt.gca().set_ylabel("Log(Normed Contact probability)")
-
             plt.gca().set_xlabel("Genomic distance")
         else:
             multiplot_with_subplots(plots, xlabel="Genomic distance", y_label="Slope")
