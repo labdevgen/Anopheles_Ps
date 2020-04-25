@@ -4,6 +4,14 @@ import numpy as np
 from Expected_calculator import get_dumpPath
 import os, pickle
 
+# compute slope
+# data - np.arrays with expected values, organized as {chr:expected_array}
+# resolution - resolution
+# starting_npoints - how many data points to use to compute slope
+# note that number of points will increase with distance because data will become noisier
+# step - step for slope computation
+# crop_min,crop_max - crop values above/below to male plot more nice
+# max_plot_dist - stop computation after reaching this distnace (in bp)
 def fit_linear_regression(data, resolution,
                           starting_npoints = 5,
                           step = 1,
@@ -11,6 +19,9 @@ def fit_linear_regression(data, resolution,
                           crop_max = -0.05,
                           max_plot_dist=50000000):
 
+    # regressing slope is computationaly intensive part
+    # one got slope coefficients, they are saved in dump_path
+    # and reused each time one call this function
     hash_key = "".join(map(str,locals().values()))
     dump_path = get_dumpPath(hash_key,root="data/fit_dumps")
     if os.path.isfile(dump_path):
@@ -55,7 +66,7 @@ def fit_linear_regression(data, resolution,
             plot_distances.append(distances[st])
             continue
 
-
+        """"
         if (st*resolution > 1000000 and len(coeffs) > 5) and False:
             # check diference
             av = np.average(coeffs[-4:-1])
@@ -69,7 +80,7 @@ def fit_linear_regression(data, resolution,
                     plot_distances.append(distances[st])
                     local_average = []
                 continue
-
+        """"
         coeffs.append(curr_coef)
         plot_distances.append(distances[st])
 
