@@ -23,7 +23,7 @@ def multiplots(plots, shadow, average, logx = True):
         Yav = df_final.apply(np.nanmedian, axis=1).values
 
     if average:
-        plt.plot(X, Yav, color="black", ls="--", linewidth=2, label="Median")
+        plt.plot(X, Yav, color="black", ls="--", linewidth=1, label="Median")
         legend_items += 1
     #plt.plot(X, Ymax, color="black", linewidth=4, legend="Min/Max")
     #plt.plot(X, Ymin, color="black", linewidth=4)
@@ -32,7 +32,6 @@ def multiplots(plots, shadow, average, logx = True):
         plt.fill_between(X,Ymin,Ymax,alpha=0.1)
 
     plt.xscale("log")
-
     # Shrink current axis's height by 10% on the bottom
     ax = plt.gca()
     box = ax.get_position()
@@ -41,8 +40,7 @@ def multiplots(plots, shadow, average, logx = True):
 
     # Put a legend below current axis
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15),
-              ncol=(legend_items + 1) // 3)
-
+              ncol=(legend_items + 1) // 4, prop={'size': 2})
 
 def multiplot_with_subplots(plots, xlabel, y_label):
     if len(plots.values()) <= 6:
