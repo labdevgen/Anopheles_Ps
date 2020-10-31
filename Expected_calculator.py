@@ -84,7 +84,7 @@ def dump(file, juicerpath, resolution, minchrsize = 20000000,
 
         if not os.path.isfile(chromosome_hash_file):
             command = ["java","-jar",juicerpath,"dump","expected",
-                        "KR",file,chr,"BP",str(resolution),chromosome_hash_file]
+                        norm,file,chr,"BP",str(resolution),chromosome_hash_file]
             logging.info(" ".join(command))
             retrie_number = 0
             while retrie_number < 10:

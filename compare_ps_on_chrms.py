@@ -129,7 +129,7 @@ def chr2color(chr):
         return {"color":"red"}
     return {"color":"black"}
 
-norm="None"
+norm="None" # choose KR or None
 
 # for func in ["Ps_log"]:
 for func in ["Ps"]:
