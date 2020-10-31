@@ -1,11 +1,11 @@
 name	taxon	subtaxon	Genotype	link	compartments
-An. col	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AcolNg/AcolNg_V4.hic	data/eig/AcolNg_V3.tpm.my.eig.bedGraph
-An. mer (adult)	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AmerR4/AmerR4A_V4.hic
-An. mer (embryo)	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AmerR4/AmerR4_V4.hic
-An. ste	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AsteI2/AsteI2_V4.hic
-Aqmac	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/Aqmac/Aqmac_V3R.hic
-An. alb	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AalbS2/AalbS2_V4.hic
-An. atr	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/AatrE3/AatrE3_V4.hic	data/eig/AatrE3_V3.tpm.my.eig.bedGraph
+An. col	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/ActualData/hic/AcolNg_V4//AcolNg_V4.hic	data/eig/AcolNg_V3.tpm.my.eig.bedGraph
+An. mer (adult)	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/ActualData/hic/AmerR4_V4/AmerR4A_V4.hic
+An. mer (embryo)	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/ActualData/hic/AmerR4_V4/AmerR4_V4.hic
+An. ste	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/ActualData/hic/AsteI2_V4/AsteI2_V4.hic
+# Aqmac	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/hic/Aqmac/Aqmac_V3R.hic
+An. alb	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/ActualData/hic/AalbS2_V4/AalbS2_V4.hic
+An. atr	insect	Anopheles	WT	https://genedev.bionet.nsc.ru/site/hic_out/Anopheles/ActualData/hic/AatrE3_V4/AatrE3_V4.hic	data/eig/AatrE3_V3.tpm.my.eig.bedGraph
 Dmel_Renschler	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Renschler_et_al_dmel/GSM3414719_Dmel.hic
 Dmel embryo 3-4h	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Drosophilla/Hug_dmel_development/3_4h_Embryo/aligned/inter.hic
 Dmel embryo nc12	insect	Drosophila	WT	https://genedev.bionet.nsc.ru/site/hic_out/Drosophilla/Hug_dmel_development/nuclear_cycle_12/aligned/inter.hic

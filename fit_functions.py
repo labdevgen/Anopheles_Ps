@@ -66,7 +66,7 @@ def fit_linear_regression(data, resolution,
             plot_distances.append(distances[st])
             continue
 
-        """"
+        """
         if (st*resolution > 1000000 and len(coeffs) > 5) and False:
             # check diference
             av = np.average(coeffs[-4:-1])
@@ -80,7 +80,7 @@ def fit_linear_regression(data, resolution,
                     plot_distances.append(distances[st])
                     local_average = []
                 continue
-        """"
+        """
         coeffs.append(curr_coef)
         plot_distances.append(distances[st])
 

@@ -44,11 +44,20 @@ def get_dumpPath(*args, root=".", create_dirs = False):
 
 # dump data to .expected file or reload from cash
 def dump(file, juicerpath, resolution, minchrsize = 20000000,
-         excludechrms = ("X","chrX","Y","chrY","Z","chrZ","W","chrW")
+         excludechrms = ("X","chrX","Y","chrY","Z","chrZ","W","chrW"),
+         norm = "KR"
          ):
 
-    hashfile = get_dumpPath(file,resolution,minchrsize,excludechrms,
+    if norm == "KR":
+        # backward compatibility issue
+        # before norm was not a part of hashfile and was constly set to KR
+        # thus, KR norm is not included to hash string
+        hashfile = get_dumpPath(file,resolution,minchrsize,excludechrms,
                             root="data/all_chr_dumps")
+    else:
+        hashfile = get_dumpPath(file,resolution,minchrsize,excludechrms,norm,
+                            root="data/all_chr_dumps")
+    print (hashfile)
     if os.path.isfile(hashfile):
         return pickle.load(open(hashfile,"rb"))
 
@@ -63,8 +72,16 @@ def dump(file, juicerpath, resolution, minchrsize = 20000000,
     # dump data for all valid chrms
     data = {}
     for chr in valid_chrms:
-        chromosome_hash_file = get_dumpPath(file,resolution,minchrsize,excludechrms,chr,
-                                            root="data/all_chr_dumps/")
+        if norm == "KR":
+            # backward compatibility issue
+            # before norm was not a part of hashfile and was constly set to KR
+            # thus, KR norm is not included to hash string
+            chromosome_hash_file = get_dumpPath(file, resolution, minchrsize,
+                                            excludechrms, chr, root="data/all_chr_dumps/")
+        else:
+            chromosome_hash_file = get_dumpPath(file, resolution, minchrsize,
+                                            excludechrms, chr, norm, root="data/all_chr_dumps/")
+
         if not os.path.isfile(chromosome_hash_file):
             command = ["java","-jar",juicerpath,"dump","expected",
                         "KR",file,chr,"BP",str(resolution),chromosome_hash_file]
