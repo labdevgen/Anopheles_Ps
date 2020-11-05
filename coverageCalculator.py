@@ -9,7 +9,8 @@ def getCoverage(file, resolution, juicer_tools_path, norm):
 
     # file - hic-file
     # resolution - resolution to use
-
+    print ("Hello")
+    raise
     strawObj = straw.straw(file)
     chrms = get_vaid_chrms_from_straw(strawObj, minchrsize=0, excludechrms=())
     contacts = []
@@ -20,4 +21,6 @@ def getCoverage(file, resolution, juicer_tools_path, norm):
             contacts.append(get_contacts_using_juicer_dump(juicer_tools_path,file,chrm1,
                                                                     resolution,chrm2,datatype="observed",
                                                                     norm = norm))
+            print (contacts)
+            raise
     return pd.concat(contacts)
