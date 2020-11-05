@@ -118,12 +118,13 @@ def computeExpected(data, resolution):
                           right_on = "all_dist", how="outer").sort_index()["count"].fillna(0.)
     return result
 
-def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,datatype = "observed"):
+def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,
+                                   datatype = "observed", norm="KR"):
     if chr2 is None:
         chr2 = chr1
     # dump contacts from chromosome to temp file, then read if to Dframe
     command = ["java", "-jar", juicerpath, "dump", datatype,
-               "KR", file, chr1, chr2, "BP", str(resolution), "temp.contacts"]
+               norm, file, chr1, chr2, "BP", str(resolution), "temp.contacts"]
     print(" ".join(command))
     try:
         subprocess.run(" ".join(command), shell=True,
@@ -140,6 +141,8 @@ def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,dat
         assert np.all(contacts["dist"].values >= 0)
     else:
         contacts["dist"] = (contacts["st2"] - contacts["st1"]).abs()
+    contacts["chr1"] = [chr1]*len(contacts)
+    contacts["chr2"] = [chr2]*len(contacts)
     return contacts
 
 def getExpectedByCompartments(file, juicerpath, resolution,
