@@ -122,7 +122,8 @@ def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,
                                    datatype = "observed", norm="KR"):
     if chr2 is None:
         chr2 = chr1
-    dump_path = get_dumpPath("./data/single_chr_dumps",file,chr1,resolution,chr2,datatype,norm)
+    dump_path = get_dumpPath(file,chr1,resolution,chr2,datatype,norm,
+                             root="./data/single_chr_dumps")
     if os.path.isfile(dump_path):
         return pickle.load(open(dump_path,"rb"))
     # dump contacts from chromosome to temp file, then read if to Dframe
