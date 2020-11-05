@@ -124,7 +124,7 @@ def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,
         chr2 = chr1
     dump_path = get_dumpPath("./data/single_chr_dumps",file,chr1,resolution,chr2,datatype,norm)
     if os.path.isfile(dump_path):
-        return pickle.load(dump_path)
+        return pickle.load(open(dump_path,"rb"))
     # dump contacts from chromosome to temp file, then read if to Dframe
     command = ["java", "-jar", juicerpath, "dump", datatype,
                norm, file, chr1, chr2, "BP", str(resolution), "temp.contacts"]
@@ -146,7 +146,7 @@ def get_contacts_using_juicer_dump(juicerpath,file,chr1,resolution,chr2=None,
         contacts["dist"] = (contacts["st2"] - contacts["st1"]).abs()
     contacts["chr1"] = [chr1]*len(contacts)
     contacts["chr2"] = [chr2]*len(contacts)
-    pickle.dump(contacts,dump_path)
+    pickle.dump(contacts,open(dump_path,"wb"))
     return contacts
 
 def getExpectedByCompartments(file, juicerpath, resolution,
