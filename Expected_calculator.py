@@ -1,4 +1,4 @@
-import straw
+import hicstraw as straw
 import pickle
 import subprocess
 import os
